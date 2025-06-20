@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>RR Travels – Car Details</title>
+<style>
+:root{
+  --accent:#ff4d4d;--accent-dark:#c20000;
+  --bg:#0f0f0f;--card:#1b1b1b;--text:#fff;
+  --success:#28a745;--info:#ff9900;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+body{background:var(--bg);color:var(--text);display:flex;justify-content:center;padding:2rem}
+.card{width:460px;max-width:100%;background:var(--card);border-radius:16px;padding:1.6rem;box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.card img{width:100%;height:240px;object-fit:cover;border-radius:10px;margin:1rem 0}
+h1{text-align:center;font-size:1.6rem;color:var(--accent)}
+h3{text-align:center;color:#ccc;margin:.25rem 0 .8rem}
+p{font-size:.9rem;margin:.25rem 0}
+p strong{display:inline-block;width:120px}
+ul{list-style:none;margin:.6rem 0;padding-left:1rem}
+ul li{font-size:.86rem;color:#ddd;margin:.22rem 0;padding-left:.9rem;position:relative}
+ul li::before{content:'✔';position:absolute;left:0;color:#28a745}
+.buttons{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-top:1rem}
+.btn{background:var(--accent);color:#fff;padding:.55rem 1.2rem;border-radius:8px;font-size:.85rem;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--accent-dark)}
+.btn.green{background:var(--success)} .btn.green:hover{background:#1e7e34}
+.btn.blue {background:var(--info)}    .btn.blue:hover {background:#cc7a00}
+form{display:none;margin-top:1rem;text-align:left}
+form input,form textarea{width:100%;padding:.55rem;border:1px solid #666;border-radius:6px;background:#262626;color:#fff;margin-top:.3rem}
+form button{margin-top:.8rem;background:var(--success);border:none;color:#fff;padding:.55rem 1.2rem;border-radius:8px;font-size:.9rem}
+.contact{display:none;margin-top:1rem;font-size:.88rem;line-height:1.5}
+.contact span{color:#ccc}
+</style>
+</head>
+<body>
+
+<div id="box" class="card">Loading…</div>
+
+<script>
+/* ---------- VEHICLE DATA ---------- */
+const cars={
+  swift:{ name:"Maruti Swift", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsGzFBvUDwFdENhA7tOOuyw-Nyb659vvRJzQ&s", rate:"₹10/km", model:"Swift VXi", year:"2023", fuel:"Petrol", features:["Power Steering","AC","Bluetooth Audio","Airbags"] },
+  ertiga:{ name:"Maruti Ertiga", image:"https://s3-ap-southeast-1.amazonaws.com/staticin.izmocars.com/toolkit/IN/2022/22marutisuzuki/22marutisuzukiertiga/22marutisuzukiertiga_pixGallery/_gallerypix/marutisuzuki_ertiga_concept.jpg", rate:"₹12/km", model:"Ertiga ZXi", year:"2022", fuel:"Petrol", features:["7‑Seater","Rear AC","Touchscreen","ABS + EBD"] },
+  creta:{ name:"Hyundai Creta", image:"https://i0.wp.com/cargayan.com/wp-content/uploads/2023/06/13-3.png?fit=900%2C600&ssl=1", rate:"₹13/km", model:"Creta SX Diesel", year:"2024", fuel:"Diesel", features:["Sunroof","Wireless Charger","6 Airbags","Reverse Camera"] },
+  innova:{ name:"Toyota Innova", image:"https://mda.spinny.com/sp-file-system/public/2025-05-12/7b558a03a86143878fdb69f4fe131b63/raw/file.JPG", rate:"₹14/km", model:"Innova VX Hybrid", year:"2023", fuel:"Hybrid", features:["8‑Seater","Auto Climate","Cruise Control","Touchscreen"] },
+  traveller:{ name:"Force Traveller", image:"https://images.91trucks.com/buses/models/71/1542/force-traveller-3350-wider-body-1781789700.jpg?w=640&v=1234", rate:"₹18/km", model:"Traveller 17‑Seater", year:"2022", fuel:"Diesel", features:["17 Seats","High Roof","Individual AC Vents","Large Boot"] },
+  hiace:{ name:"Toyota Hiace Van", image:"https://stimg.cardekho.com/images/carexteriorimages/630x420/Toyota/Toyota-HiAce/4223/1558332212578/front-left-side-47.jpg", rate:"₹17/km", model:"Hiace Commuter", year:"2022", fuel:"Diesel", features:["15 Seats","Dual AC","Sliding Door","Rear Camera"] }
+};
+
+/* ---------- RENDER ---------- */
+const key  = new URLSearchParams(location.search).get('car');
+const d    = cars[key];
+const box  = document.getElementById('box');
+
+function show(id){ document.getElementById(id).style.display='block'; }
+function handleBooking(e){
+  e.preventDefault();
+  alert('Thank you! RR Travels will confirm your booking shortly.');
+  e.target.reset();
+}
+
+if(d){
+  box.innerHTML=`
+    <h1>${d.name}</h1>
+    <h3>${d.model} • ${d.year}</h3>
+    <img src="${d.image}" alt="${d.name}">
+    <p><strong>Rate:</strong> ${d.rate}</p>
+    <p><strong>Fuel:</strong> ${d.fuel}</p>
+    <ul>${d.features.map(f=>`<li>${f}</li>`).join('')}</ul>
+
+    <div class="buttons">
+      <a href="index.html" class="btn">⬅ Back</a>
+      <a class="btn green" onclick="show('bookForm')">📝 Book Trip</a>
+      <a class="btn blue"  onclick="show('contactInfo')">📞 Contact Owner</a>
+    </div>
+
+    <form id="bookForm" onsubmit="handleBooking(event)">
+      <label>Name:<input required></label><br><br>
+      <label>Phone:<input type="tel" required></label><br><br>
+      <label>Date:<input type="date" required></label><br><br>
+      <label>KMs Needed:<input type="number" required></label><br><br>
+      <label>Message:<textarea rows="3"></textarea></label><br>
+      <button type="submit">Request Booking</button>
+    </form>
+
+    <div id="contactInfo" class="contact">
+      <p><strong>Owner:</strong> RR Travels</p>
+      <p><strong>Phone:</strong> <span>+91 7601057948</span></p>
+      <p><strong>Email:</strong> <span>rrtravels@example.com</span></p>
+    </div>
+  `;
+}else{
+  box.innerHTML='<h1>Car Not Found</h1><a href="index.html" class="btn" style="margin-top:1rem;display:inline-block">⬅ Back</a>';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RR Travels – Rent Your Ride</title>
+  <style>
+    :root{
+      --accent:#ff4d4d; --accent-dark:#c20000;
+      --bg:#0f0f0f;     --card:#1b1b1b;
+      --text:#fff;      --success:#28a745;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+    body{background:var(--bg);color:var(--text);padding:1.5rem}
+
+    header{background:var(--accent);padding:1.4rem 1rem;text-align:center;border-radius:12px;margin-bottom:1.6rem}
+    header h1{font-size:2rem;color:#fff}
+
+    .search-box{display:flex;justify-content:center;margin-bottom:1.5rem}
+    .search-box input{
+      width:80%;max-width:400px;padding:.7rem 1rem;border-radius:30px;border:none;
+      background:#2a2a2a;color:#fff;font-size:1rem;text-align:center;
+    }
+
+    .grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem}
+    .card{
+      background:var(--card);border-radius:12px;width:280px;padding:1rem;
+      box-shadow:0 4px 16px rgba(0,0,0,.3);transition:.2s
+    }
+    .card:hover{transform:translateY(-5px)}
+    .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:.8rem}
+    .card h2{font-size:1.2rem;margin-bottom:.4rem;color:var(--accent)}
+    .card p{font-size:.9rem;margin:.2rem 0}
+    .btn{
+      display:inline-block;margin-top:.8rem;background:var(--success);
+      padding:.5rem 1rem;color:#fff;border-radius:6px;text-decoration:none;font-size:.9rem
+    }
+    .hidden{display:none!important}
+  </style>
+</head>
+<body>
+
+<header><h1>🚙 RR Travels – Rent Your Ride</h1></header>
+
+<div class="search-box">
+  <input id="searchInput" type="text" placeholder="Search cars or vans…">
+</div>
+
+<div class="grid">
+  <!-- Swift -->
+  <div class="card" data-name="swift">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsGzFBvUDwFdENhA7tOOuyw-Nyb659vvRJzQ&s" alt="Swift">
+    <h2>Maruti Swift</h2>
+    <p>Rate: ₹10/km</p><p>Fuel: Petrol</p>
+    <a class="btn" href="details.html?car=swift">View Details</a>
+  </div>
+
+  <!-- Ertiga -->
+  <div class="card" data-name="ertiga">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/staticin.izmocars.com/toolkit/IN/2022/22marutisuzuki/22marutisuzukiertiga/22marutisuzukiertiga_pixGallery/_gallerypix/marutisuzuki_ertiga_concept.jpg" alt="Ertiga">
+    <h2>Maruti Ertiga</h2>
+    <p>Rate: ₹12/km</p><p>Fuel: Petrol</p>
+    <a class="btn" href="details.html?car=ertiga">View Details</a>
+  </div>
+
+  <!-- Creta -->
+  <div class="card" data-name="creta">
+    <img src="https://i0.wp.com/cargayan.com/wp-content/uploads/2023/06/13-3.png?fit=900%2C600&ssl=1" alt="Creta">
+    <h2>Hyundai Creta</h2>
+    <p>Rate: ₹13/km</p><p>Fuel: Diesel</p>
+    <a class="btn" href="details.html?car=creta">View Details</a>
+  </div>
+
+  <!-- Innova -->
+  <div class="card" data-name="innova">
+    <img src="https://mda.spinny.com/sp-file-system/public/2025-05-12/7b558a03a86143878fdb69f4fe131b63/raw/file.JPG" alt="Innova">
+    <h2>Toyota Innova</h2>
+    <p>Rate: ₹14/km</p><p>Fuel: Hybrid</p>
+    <a class="btn" href="details.html?car=innova">View Details</a>
+  </div>
+
+  <!-- Force Traveller -->
+  <div class="card" data-name="traveller">
+    <img src="https://images.91trucks.com/buses/models/71/1542/force-traveller-3350-wider-body-1781789700.jpg?w=640&v=1234" alt="Traveller">
+    <h2>Force Traveller</h2>
+    <p>Rate: ₹18/km</p><p>Fuel: Diesel</p>
+    <a class="btn" href="details.html?car=traveller">View Details</a>
+  </div>
+
+  <!-- Toyota Hiace -->
+  <div class="card" data-name="hiace">
+    <img src="https://stimg.cardekho.com/images/carexteriorimages/630x420/Toyota/Toyota-HiAce/4223/1558332212578/front-left-side-47.jpg" alt="Hiace">
+    <h2>Toyota Hiace Van</h2>
+    <p>Rate: ₹17/km</p><p>Fuel: Diesel</p>
+    <a class="btn" href="details.html?car=hiace">View Details</a>
+  </div>
+</div>
+
+<script>
+const searchInput = document.getElementById('searchInput');
+const cards       = document.querySelectorAll('.card');
+
+searchInput.addEventListener('input',()=>{
+  const q = searchInput.value.toLowerCase();
+  cards.forEach(c=>{
+    c.classList.toggle('hidden', !c.dataset.name.includes(q));
+  });
+});
+</script>
+
+</body>
+</html>
